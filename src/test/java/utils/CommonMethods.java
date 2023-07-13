@@ -240,7 +240,5 @@ public class CommonMethods extends PageInitializer {
             driver.quit();
         }
     }
-
-
 }
 
