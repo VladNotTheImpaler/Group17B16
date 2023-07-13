@@ -192,4 +192,40 @@ public class CommonMethods extends PageInitializer {
     public static void waitForClickability(WebElement element){
         getWait().until(ExpectedConditions.elementToBeClickable(element));
     }
+    // Method to switch driver focus to a frame using frame ID or name
+    public void switchToFrameByNameOrId(String frameNameOrId) {
+        driver.switchTo().frame(frameNameOrId);
+    }
+    // Method to switch driver focus to a frame using frame Index
+    public void swithToFrameByIndex(int frameIndex) {
+        driver.switchTo().frame(frameIndex);
+    }
+    // Method to switch driver focus to a frame using frame WebElement
+    public void switchToFrameByElement(WebElement frameElement) {
+        driver.switchTo().frame(frameElement);
+    }
+    // Method to switch driver focus back to the default content
+    public void switchToDefault(){
+        driver.switchTo().defaultContent();
+    }
+
+   /* public void takeScreenshotAndSave(String fileName) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
+        File screenShot = ts.getScreenshotAs(OutputType.FILE);
+
+        try {
+            FileUtils.copyFile(screenShot,
+                    new File(Constants.SCREENSHOT_FILEPATH + fileName + " "
+                            + getTimeStamp("yyyy-MM-dd-HH-mm-ss") + ".jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+}
+
+    */
 }
