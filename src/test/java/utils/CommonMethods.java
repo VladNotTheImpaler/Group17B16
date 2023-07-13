@@ -1,6 +1,5 @@
 package utils;
 
-<<<<<<< HEAD
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -22,17 +21,13 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
     public static ChromeOptions optionsChrome;
     public static FirefoxOptions optionsFireFox;
-
-    static Properties properties;
 
 
     //method for open browser and getting the url from the Config.properties file
@@ -174,72 +169,78 @@ public class CommonMethods extends PageInitializer {
         return simpleDateFormat.format(date);
     }
 
-    public static Properties readProperties(String filePath) {
-        try {
-            FileInputStream fileIn = new FileInputStream(filePath);
-            properties = new Properties();
-            properties.load(fileIn);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return properties;
+
+    //method for the implicitWait set-up
+    public static void implicitWait(int sec) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(sec));
     }
 
-    public static String getPropertyValue(String key){
-        return properties.getProperty(key);
+    //method for the explicitWait set-up
+    public static void waitForClick(WebElement element, int sec) {
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
     }
-    public static WebDriverWait getWait(){
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
-        return  wait;
-    }
-    public static void waitForClickability(WebElement element){
-        getWait().until(ExpectedConditions.elementToBeClickable(element));
-    }
+
     // Method to switch driver focus to a frame using frame ID or name
     public void switchToFrameByNameOrId(String frameNameOrId) {
         driver.switchTo().frame(frameNameOrId);
     }
+
     // Method to switch driver focus to a frame using frame Index
-    public void swithToFrameByIndex(int frameIndex) {
+    public void switchToFrameByIndex(int frameIndex) {
         driver.switchTo().frame(frameIndex);
     }
+
     // Method to switch driver focus to a frame using frame WebElement
     public void switchToFrameByElement(WebElement frameElement) {
         driver.switchTo().frame(frameElement);
     }
+
     // Method to switch driver focus back to the default content
-    public void switchToDefault(){
+    public void switchToDefault() {
         driver.switchTo().defaultContent();
     }
 
-  /*  public void takeScreenshotAndSave(String fileName) {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
-        File screenShot = ts.getScreenshotAs(OutputType.FILE);
+
+    // method for taking the screenshots specifically for the Cucumber +
+    // attach it to the report using the array of bytes concepts
+    public static byte[] takeScreenshot(String name) {
+        var ts = (TakesScreenshot) driver;
+        var picBytes = ts.getScreenshotAs(OutputType.BYTES);
+        var file = ts.getScreenshotAs(OutputType.FILE);
 
         try {
-            FileUtils.copyFile(screenShot,
-                    new File(Constants.SCREENSHOT_FILEPATH + fileName + " "
-                            + timeStamp("yyyy-MM-dd-HH-mm-ss") + ".jpg"));
+            FileUtils.copyFile(file, new File(Constants.SCREENSHOT_FOLDER_PATH + name + " " +
+                    getTimeStamp("yyyy-MM-dd-HH-mm-ss") + ".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-
+        return picBytes;
     }
 
-   */
+    //this method help us to get the current time
+    public static String getTimeStamp(String pattern) {
+        //this function return the date
+        var date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.format(date);
+    }
+
+
+    //method for sending the text to the filed
+    public static void sendText(String text, WebElement element) {
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    //close browser method
     public static void closeBrowser() {
         if (driver != null) {
             driver.quit();
         }
     }
-    public static void sendText(String text, WebElement element) {
-        element.clear();
-        element.sendKeys(text);
-    }
+
 
 }
 
