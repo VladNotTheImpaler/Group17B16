@@ -1,6 +1,7 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,6 +11,7 @@ import steps.PageInitializer;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 
 public class CommonMethods extends PageInitializer {
@@ -72,7 +74,9 @@ public class CommonMethods extends PageInitializer {
         return properties;
     }
 
-    // we use this method for getting the data from the Config.properties or any other file as well
+
+    // we use this method for getting the data from the Config.properties
+    // or any other file as well
     public static String getProperty(String key) {
 
         Properties properties = null;
@@ -83,6 +87,35 @@ public class CommonMethods extends PageInitializer {
         }
         return properties.getProperty(key);
     }
+
+
+    //single checkbox method and boolean implicitWait
+    //Example: WebElement variable = driver.findElement...
+    public static void singleCheckBox(WebElement variable, boolean enableImplicitWait) {
+        if (enableImplicitWait) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        }
+
+        if (!variable.isSelected()) {
+            variable.click();
+        }
+    }
+
+    //multiply checkbox selection and option to select all checkboxes
+    //Example: List<WebElement> variable = driver.findElements...
+    //Example: List<String> attributeValuesToSelect = Arrays.asList("Option-2", "Option-4");
+    public static void checkBoxMultiple(List<WebElement> variable, List<String> attributeValuesToSelect, boolean selectAllOrNot) {
+        for (var select : variable) {
+            var codeValue = select.getAttribute("value");
+            if (select.isSelected()) {
+                select.clear();
+            } else if (selectAllOrNot || attributeValuesToSelect.contains(codeValue)) {
+                select.click();
+                //break;
+            }
+        }
+    }
+
 
 
 }
