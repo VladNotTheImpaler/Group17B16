@@ -6,9 +6,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.PageInitializer;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
@@ -23,6 +26,8 @@ public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
     public static ChromeOptions optionsChrome;
     public static FirefoxOptions optionsFireFox;
+
+    static Properties properties;
 
 
     //method for open browser and getting the url from the Config.properties file
@@ -164,5 +169,27 @@ public class CommonMethods extends PageInitializer {
         return simpleDateFormat.format(date);
     }
 
+    public static Properties readProperties(String filePath) {
+        try {
+            FileInputStream fileIn = new FileInputStream(filePath);
+            properties = new Properties();
+            properties.load(fileIn);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
 
+    public static String getPropertyValue(String key){
+        return properties.getProperty(key);
+    }
+    public static WebDriverWait getWait(){
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        return  wait;
+    }
+    public static void waitForClickability(WebElement element){
+        getWait().until(ExpectedConditions.elementToBeClickable(element));
+    }
 }
