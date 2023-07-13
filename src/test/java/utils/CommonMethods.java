@@ -1,5 +1,6 @@
 package utils;
 
+<<<<<<< HEAD
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -230,5 +231,15 @@ public class CommonMethods extends PageInitializer {
     }
 
    */
+    public static void closeBrowser() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+    public static void sendText(String text, WebElement element) {
+        element.clear();
+        element.sendKeys(text);
+    }
 
 }
+
