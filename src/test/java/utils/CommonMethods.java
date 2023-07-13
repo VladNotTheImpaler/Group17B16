@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.PageInitializer;
 
@@ -241,6 +242,20 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
+    public static void selectFromDropdown(WebElement dd, String selectBy,String value){
+        Select sel=new Select(dd);
+
+        if(selectBy.equalsIgnoreCase("VisibleText")){
+            sel.selectByVisibleText(value);
+        } else if (selectBy.equalsIgnoreCase("Value")) {
+            sel.selectByValue(value);
+        } else if (selectBy.equalsIgnoreCase("Index")) {
+            int index=Integer.parseInt(value);
+            sel.selectByIndex(index);
+        }else{
+            throw new IllegalArgumentException("Please use VisibleText,Value,Index");
+        }
+    }
 
 }
 
