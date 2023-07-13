@@ -1,5 +1,6 @@
 package utils;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,12 +15,15 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
     public static ChromeOptions optionsChrome;
     public static FirefoxOptions optionsFireFox;
-
-
     //method for open browser and getting the url from the Config.properties file
     public static void openBrowserGetURL(String url, String browser) {
         getProperties(Constants.CONFIG_READER_PATH);
@@ -116,6 +120,48 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
+    //method to select radio button from multiply selection
+    public static void radioButtonMultiply(List<WebElement> radioButton, String value) {
+        for (WebElement webElement : radioButton) {
+            String actualValue = webElement.getAttribute("value");
+            if (actualValue.equals(value))
+                webElement.click();
+            break;
+        }
+    }
+
+    //method for selecting the single radio button
+    public static void radioButton(WebElement variable) {
+        variable.click();
+    }
+
+
+    //void method for checking isSelected radioButton or not
+    public static void isSelected(WebElement element, String radiobutton) {
+        boolean selected = element.isSelected();
+        System.out.println("The radio " + radiobutton + "is " + selected);
+    }
+
+    //void method for checking isDisplayed radioButton or not
+    public static void isDisplayed(WebElement element, String radiobutton) {
+        boolean displayed = element.isDisplayed();
+        System.out.println("The radio " + radiobutton + "is" + displayed);
+    }
+
+    //void method for checking isEnabled radioButton or not
+    public static void isEnabled(WebElement element, String radiobutton) {
+        boolean enabled = element.isEnabled();
+        System.out.println("The radio " + radiobutton + "is" + enabled);
+    }
+
+
+    //The purpose of this method is to provide a convenient way to
+    // get the current date and time in a specific format
+    public static String timeStamp(String pattern) {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        return simpleDateFormat.format(date);
+    }
 
 
 }
