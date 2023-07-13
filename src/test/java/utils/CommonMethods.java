@@ -1,6 +1,5 @@
 package utils;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +23,8 @@ public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
     public static ChromeOptions optionsChrome;
     public static FirefoxOptions optionsFireFox;
+
+
     //method for open browser and getting the url from the Config.properties file
     public static void openBrowserGetURL(String url, String browser) {
         getProperties(Constants.CONFIG_READER_PATH);
