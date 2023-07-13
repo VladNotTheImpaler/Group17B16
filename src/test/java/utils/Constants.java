@@ -2,6 +2,7 @@ package utils;
 
 public class Constants {
 
-    public static final String SCREENSHOT_FILEPATH =System.getProperty("user.dir")+
-            "/screenshots/";
+    //add the path to the config.properties file
+    public static final String CONFIG_READER_PATH = System.getProperty("user.dir") +
+            "/src/test/resources/config/config.properties";
 }
