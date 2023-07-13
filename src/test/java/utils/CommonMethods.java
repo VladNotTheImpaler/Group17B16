@@ -1,14 +1,124 @@
 package utils;
 
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import steps.PageInitializer;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
+import java.util.Properties;
 
 import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class CommonMethods {
+public class CommonMethods extends PageInitializer {
+    public static WebDriver driver;
+    public static ChromeOptions optionsChrome;
+    public static FirefoxOptions optionsFireFox;
+    //method for open browser and getting the url from the Config.properties file
+    public static void openBrowserGetURL(String url, String browser) {
+        getProperties(Constants.CONFIG_READER_PATH);
+        switch (browser) {
+            case "chrome" -> {
+                optionsChrome = new ChromeOptions();
+                // set language
+                optionsChrome.addArguments("--lang=en");
+                //  create instance
+                driver = new ChromeDriver(optionsChrome);
+            }
+            case "firefox" -> {
+                optionsFireFox = new FirefoxOptions();
+                // set language
+                optionsFireFox.addArguments("--lang=en");
+                //  create instance
+                driver = new FirefoxDriver(optionsFireFox);
+            }
+        }
+
+        driver.manage().window().maximize();
+        driver.get(url);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        //this method is going to initialize all the objects available
+        // inside this method that is located in PageInitializer class
+        initializePageObjects();
+    }
+
+
+    //we use this method if we need to connect to the properties to get the data
+    // sing another getProperty method
+    public static Properties getProperties(String path) {
+
+        FileInputStream fis = null;
+        Properties properties = null;
+
+        try {
+            fis = new FileInputStream(path);
+            properties = new Properties();
+            properties.load(fis);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return properties;
+    }
+
+
+    // we use this method for getting the data from the Config.properties
+    // or any other file as well
+    public static String getProperty(String key) {
+
+        Properties properties = null;
+        try {
+            properties = getProperties(Constants.CONFIG_READER_PATH);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return properties.getProperty(key);
+    }
+
+
+    //single checkbox method and boolean implicitWait
+    //Example: WebElement variable = driver.findElement...
+    public static void singleCheckBox(WebElement variable, boolean enableImplicitWait) {
+        if (enableImplicitWait) {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        }
+
+        if (!variable.isSelected()) {
+            variable.click();
+        }
+    }
+
+    //multiply checkbox selection and option to select all checkboxes
+    //Example: List<WebElement> variable = driver.findElements...
+    //Example: List<String> attributeValuesToSelect = Arrays.asList("Option-2", "Option-4");
+    public static void checkBoxMultiple(List<WebElement> variable, List<String> attributeValuesToSelect, boolean selectAllOrNot) {
+        for (var select : variable) {
+            var codeValue = select.getAttribute("value");
+            if (select.isSelected()) {
+                select.clear();
+            } else if (selectAllOrNot || attributeValuesToSelect.contains(codeValue)) {
+                select.click();
+                //break;
+            }
+        }
+    }
 
 public static void radioButton(List<WebElement> radioButton , String value) {
     String actualValue;
