@@ -1,5 +1,8 @@
 package utils;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.PageInitializer;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -209,7 +213,7 @@ public class CommonMethods extends PageInitializer {
         driver.switchTo().defaultContent();
     }
 
-   /* public void takeScreenshotAndSave(String fileName) {
+  /*  public void takeScreenshotAndSave(String fileName) {
         TakesScreenshot ts = (TakesScreenshot) driver;
         byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
         File screenShot = ts.getScreenshotAs(OutputType.FILE);
@@ -217,15 +221,14 @@ public class CommonMethods extends PageInitializer {
         try {
             FileUtils.copyFile(screenShot,
                     new File(Constants.SCREENSHOT_FILEPATH + fileName + " "
-                            + getTimeStamp("yyyy-MM-dd-HH-mm-ss") + ".jpg"));
+                            + timeStamp("yyyy-MM-dd-HH-mm-ss") + ".jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
     }
+    
+   */
 
-}
-
-    */
 }
