@@ -41,6 +41,9 @@ public class CommonMethods extends PageInitializer {
         driver.manage().window().maximize();
         driver.get(url);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        //this method is going to initialize all the objects available
+        // inside this method that is located in PageInitializer class
+        initializePageObjects();
     }
 
 
