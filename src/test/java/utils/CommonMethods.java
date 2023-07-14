@@ -257,5 +257,15 @@ public class CommonMethods extends PageInitializer {
             throw new IllegalArgumentException("Please use VisibleText,Value,Index");
         }
     }
+    //This method clicks on a web element after waiting for it to be clickable.
+    //It handles any exceptions by printing and error message
+    public static void click(WebElement element, int sec){
+        try{
+            waitForClick(element,sec);
+            element.click();
+        }catch (Exception e){
+            System.out.println("Unable to click element: "+element);
+        }
+    }
 }
 
