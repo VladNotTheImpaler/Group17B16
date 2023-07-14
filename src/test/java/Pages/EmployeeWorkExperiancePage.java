@@ -1,4 +1,4 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,14 +7,14 @@ import utils.CommonMethods;
 
 public class EmployeeWorkExperiancePage extends CommonMethods {
 
-    @FindBy(xpath="//*[@id='txtUsername']")
-    public WebElement usernameField;
-
-    @FindBy(id="txtPassword")
-    public WebElement passwordField;
-
-    @FindBy(id="btnLogin")
-    public WebElement loginButton;
+//    @FindBy(xpath="//*[@id='txtUsername']")
+//    public WebElement usernameField;
+//
+//    @FindBy(id="txtPassword")
+//    public WebElement passwordField;
+//
+//    @FindBy(id="btnLogin")
+//    public WebElement loginButton;
 
 
     @FindBy(id="menu_pim_viewPimModule")
@@ -48,8 +48,14 @@ public class EmployeeWorkExperiancePage extends CommonMethods {
     @FindBy(id = "experience_jobtitle")
     public WebElement jobTitle;
 
-    @FindBy(id = "experience_from_date")
-    public WebElement fromDate;
+//    @FindBy(id = "experience_from_date")
+//    public WebElement fromDate;
+
+    @FindBy(xpath = "//select[@class='ui-datepicker-month']")
+    public  WebElement fromMonth;
+
+    @FindBy(xpath = "ui-datepicker-year")
+    public WebElement fromYear;
 
     @FindBy(id = "experience_to_date")
     public WebElement toDate;
@@ -63,6 +69,7 @@ public class EmployeeWorkExperiancePage extends CommonMethods {
 
 
     public EmployeeWorkExperiancePage(){
+
         PageFactory.initElements(driver,this);
     }
 

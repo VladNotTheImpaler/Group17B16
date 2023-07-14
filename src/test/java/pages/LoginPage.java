@@ -7,7 +7,15 @@ import utils.CommonMethods;
 
 public class LoginPage extends CommonMethods {
 
-    // Inside the class, we define instance variables using the @FindBy
+    public WebElement getUsernameField() {
+        return usernameField;
+    }
+
+    public WebElement getPasswordField() {
+        return passwordField;
+    }
+
+    //Inside the class, we define instance variables using the @FindBy
     // annotation to locate the web elements.
     @FindBy(id = "txtUsername")
     private WebElement usernameField;
@@ -24,13 +32,7 @@ public class LoginPage extends CommonMethods {
     @FindBy(id = "welcome")
     public WebElement welcomeAdmin;
 
-    public WebElement getUsernameField() {
-        return usernameField;
-    }
 
-    public WebElement getPasswordField() {
-        return passwordField;
-    }
 
     //Initialize the @FindBy-annotated elements using a constructor or a method.
     public LoginPage() {
