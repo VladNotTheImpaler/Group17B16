@@ -12,9 +12,9 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/",
         glue = "steps",
         dryRun = false,
-        tags="@excel",
+        tags = "@login",
         monochrome = true,
-        plugin={"pretty","html:target/cucumber.html","json:target/cucumber.json",
+        plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json",
                 "rerun:target/failed.txt"}
 )
 public class RunnerClass {
