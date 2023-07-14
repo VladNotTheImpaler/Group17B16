@@ -45,7 +45,7 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
         var expectedFields = dataTable.asList();
         var actualFields = getDisplayedFields();
 
-        Assert.assertEquals("Number of fields mismatch", expectedFields.size(), actualFields.size());
+        Assert.assertEquals("fields mismatch", expectedFields.size(), actualFields.size());
 
         for (String expectedField : expectedFields) {
             Assert.assertTrue("Field not found: " + expectedField, actualFields.contains(expectedField));
