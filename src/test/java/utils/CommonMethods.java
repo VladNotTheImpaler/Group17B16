@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -268,6 +269,21 @@ public class CommonMethods extends PageInitializer {
                 //break;
             }
         }
+    }
+
+
+    //please don`t delete I need this method for my step UpdatePersonalInfo class
+    public static List<String> getDisplayedFields() {
+        List<String> displayedFields = new ArrayList<>();
+        displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
+        displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
+        displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
+        displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
+
+        return displayedFields;
     }
 
 

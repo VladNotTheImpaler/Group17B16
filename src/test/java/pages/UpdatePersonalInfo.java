@@ -13,8 +13,14 @@ public class UpdatePersonalInfo extends CommonMethods {
     @FindBy(id = "empsearch_id")
     public WebElement idTextField;
 
+    @FindBy(xpath = "//*[@id='resultTable']/tbody/tr/td[2]")
+    public WebElement idTableCell;
+
     @FindBy(id = "searchBtn")
     public WebElement searchButton;
+
+    @FindBy(xpath = "//*[contains(text(),'Personal Details')]")
+    public WebElement titlePersonalDetails;
 
     @FindBy(xpath = "//*[@value='Edit']")
     public WebElement btnEdit;
@@ -25,11 +31,13 @@ public class UpdatePersonalInfo extends CommonMethods {
     @FindBy(id = "personal_txtEmpMiddleName")
     public WebElement personalMiddleName;
 
-    @FindBy(id = "personal_txtEmpFirstName")
-    public WebElement personal_txtEmpLastName;
+    @FindBy(id = "personal_txtEmpLastName")
+    public WebElement personalLastName;
 
-    @FindBy(id = "personal_optGender_1")
+    @FindBy(xpath = "//*[contains(text(),'Male')]")
     public WebElement personalGenderMale;
+    @FindBy(xpath = "//*[contains(text(),'Female')]")
+    public WebElement personalGenderFemale;
 
     @FindBy(id = "personal_cmbNation")
     public WebElement personalNationality;

@@ -13,13 +13,13 @@ Feature: Update Employee Personal Information
     And the user navigates to the Employee page.
     And the user clicks on the Edit button.
     Then the following fields should be displayed:
-      | Field          |
-      | First Name     |
-      | Middle Name    |
-      | Last Name      |
-      | Gender         |
-      | Nationality    |
-      | Marital Status |
+      | First Name          |
+      | Middle Name         |
+      | Last Name           |
+      | Male                |
+      | Female              |
+      | personal_cmbNation  |
+      | personal_cmbMarital |
     And the user enters or updates the following data:
       | Field          | Value           |
       | First Name     | <firstName>     |
@@ -28,7 +28,7 @@ Feature: Update Employee Personal Information
       | Gender         | <gender>        |
       | Nationality    | <nationality>   |
       | Marital Status | <maritalStatus> |
-    And the user clicks on the "Save" button
+    And the user clicks on the Save button
     Then the user should see a success message confirming the changes were saved successfully
 
     Examples:
