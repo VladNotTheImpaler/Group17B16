@@ -1,13 +1,14 @@
 Feature: Update Employee Personal Information
 
   Background:
-    When user enters valid admin username and password
-    And user clicks on login button
-    Then user is successfully logged in the application
-    Given the user is on the Employee List page inside the PIM Tab
-    When the user selects employee from the list
-    And the user navigates to the Employee page
-    And the user clicks on the Edit button
+    When the user enters a valid admin username and password.
+    And the user clicks on the login button.
+    Then the user is successfully logged into the application.
+    And the user clicks on the Employee List button inside the PIM Tab.
+    And the user searches for the employee by ID using the ID "49749018".
+    And the user clicks on the employee from the search results.
+    And the user navigates to the Employee page.
+    And the user clicks on the Edit button.
 
   @updateInfo @scenarioOutline @regression @smoke
   Scenario Outline: update employee info with multiply set of data using scenario outline

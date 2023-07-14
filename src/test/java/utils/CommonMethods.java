@@ -242,19 +242,34 @@ public class CommonMethods extends PageInitializer {
     }
 
 
-    public static void selectFromDropdown(WebElement dd, String selectBy,String value){
-        Select sel=new Select(dd);
+    public static void selectFromDropdown(WebElement dd, String selectBy, String value) {
+        Select sel = new Select(dd);
 
-        if(selectBy.equalsIgnoreCase("VisibleText")){
+        if (selectBy.equalsIgnoreCase("VisibleText")) {
             sel.selectByVisibleText(value);
         } else if (selectBy.equalsIgnoreCase("Value")) {
             sel.selectByValue(value);
         } else if (selectBy.equalsIgnoreCase("Index")) {
-            int index=Integer.parseInt(value);
+            int index = Integer.parseInt(value);
             sel.selectByIndex(index);
-        }else{
+        } else {
             throw new IllegalArgumentException("Please use VisibleText,Value,Index");
         }
     }
+
+    //method for multiply drop-down selection and select all options at once
+    public static void multiplyDropDown(WebElement variable, List<String> attributeValuesToSelect, boolean selectAll) {
+        var obj = new Select(variable);
+        var options = obj.getOptions();
+        for (var option : options) {
+            var optionText = option.getText();
+            if (attributeValuesToSelect.contains(optionText) || selectAll) {
+                option.click();
+                //break;
+            }
+        }
+    }
+
+
 }
 
