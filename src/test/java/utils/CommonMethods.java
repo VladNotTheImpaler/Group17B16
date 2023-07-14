@@ -241,8 +241,7 @@ public class CommonMethods extends PageInitializer {
             driver.quit();
         }
     }
-<<<<<<< HEAD
-=======
+
 
     public static void selectFromDropdown(WebElement dd, String selectBy,String value){
         Select sel=new Select(dd);
@@ -258,7 +257,5 @@ public class CommonMethods extends PageInitializer {
             throw new IllegalArgumentException("Please use VisibleText,Value,Index");
         }
     }
-
->>>>>>> dropDown
 }
 
