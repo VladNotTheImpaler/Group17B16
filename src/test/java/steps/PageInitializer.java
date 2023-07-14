@@ -1,11 +1,13 @@
 package steps;
 
+import Pages.EmployeeWorkExperiancePage;
+
+
 public class PageInitializer {
 
-    //methods in which we will add in the future all our
-    // object of the POM classes
+    public static EmployeeWorkExperiancePage emp;
     public static void initializePageObjects() {
-
+           emp=new EmployeeWorkExperiancePage();
     }
 
 
