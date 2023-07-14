@@ -21,12 +21,9 @@ public class LoginPage extends CommonMethods {
     @FindBy(id = "spanMessage")
     public WebElement errorMsg;
 
-    //Initialize the @FindBy-annotated elements using a constructor or a method.
-    public LoginPage() {
-        PageFactory.initElements(driver, this);
-    }
+    @FindBy(id = "welcome")
+    public WebElement welcomeAdmin;
 
-    // we use the getter methods to get this private field in our steps classes
     public WebElement getUsernameField() {
         return usernameField;
     }
@@ -35,5 +32,9 @@ public class LoginPage extends CommonMethods {
         return passwordField;
     }
 
+    //Initialize the @FindBy-annotated elements using a constructor or a method.
+    public LoginPage() {
+        PageFactory.initElements(driver, this);
+    }
 
 }

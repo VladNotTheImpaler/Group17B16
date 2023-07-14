@@ -1,5 +1,7 @@
 Feature: Login related scenarios
 
+  Background:
+
   @login
   Scenario: Valid admin login
     When user enters valid admin username and password
