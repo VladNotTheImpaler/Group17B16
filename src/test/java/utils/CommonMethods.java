@@ -242,6 +242,19 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
+    //method for multiply drop-down selection and select all options at once
+    public static void multiplyDropDown(WebElement variable, List<String> attributeValuesToSelect, boolean selectAll) {
+        var obj = new Select(variable);
+        var options = obj.getOptions();
+        for (var option : options) {
+            var optionText = option.getText();
+            if (attributeValuesToSelect.contains(optionText) || selectAll) {
+                option.click();
+                //break;
+            }
+        }
+    }
+
 
     public static void selectFromDropdown(WebElement dd, String selectBy,String value){
         Select sel=new Select(dd);
