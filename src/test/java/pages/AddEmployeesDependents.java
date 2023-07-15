@@ -7,6 +7,12 @@ import utils.CommonMethods;
 
 public class AddEmployeesDependents extends CommonMethods {
 
+    @FindBy(xpath = "//a[text()='Dependents']")
+    public WebElement dependentSection;
+
+    @FindBy(id = "btnAddDependent")
+    public WebElement dependentAdd;
+
     @FindBy(id = "dependent_name")
     public WebElement dependentName;
 
@@ -20,6 +26,9 @@ public class AddEmployeesDependents extends CommonMethods {
 
     @FindBy(id = "btnSaveDependent")
     public WebElement dependentSave;
+
+    @FindBy(xpath = "//*[contains(text(),'Successfully Saved')]")
+    public WebElement successSavedDependentMsg;
 
     @FindBy(id = "btnCancel")
     public WebElement dependentCancel;
