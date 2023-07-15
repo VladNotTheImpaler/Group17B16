@@ -272,6 +272,7 @@ public class CommonMethods extends PageInitializer {
     }
 
 
+
     //please don`t delete I need this method for my step UpdatePersonalInfo class
     public static List<String> getDisplayedFields() {
         List<String> displayedFields = new ArrayList<>();

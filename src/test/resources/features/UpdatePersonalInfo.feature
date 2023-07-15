@@ -32,9 +32,9 @@ Feature: Update Employee Personal Information
     Then the user should see a success message confirming the changes were saved successfully
 
     Examples:
-      | employeeName | firstName | middleName | lastName | gender | nationality | maritalStatus |
-      | John Doe     | John      | OR         | Smith    | Female | USA         | Married       |
-      | Jane Smith   | Jane      | OR         | Johnson  | Male   | Canada      | Single        |
+      | firstName | middleName | lastName | gender | nationality | maritalStatus |
+      | John      | OR         | Smith    | Male   | Ukrainian   | Married       |
+      | Jane      | OR         | Johnson  | Male   | Ukrainian   | Single        |
 
   #@updateInfo @excel @regression @smoke
   #Scenario: update employee info using the excel file

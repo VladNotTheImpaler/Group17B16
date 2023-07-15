@@ -36,8 +36,16 @@ public class UpdatePersonalInfo extends CommonMethods {
 
     @FindBy(xpath = "//*[contains(text(),'Male')]")
     public WebElement personalGenderMale;
+
+    @FindBy(id = "personal_optGender_1")
+    public WebElement personalGenderIDMale;
+
+    //personal_optGender_1
     @FindBy(xpath = "//*[contains(text(),'Female')]")
     public WebElement personalGenderFemale;
+
+    @FindBy(id = "personal_optGender_2")
+    public WebElement personalGenderIDFemale;
 
     @FindBy(id = "personal_cmbNation")
     public WebElement personalNationality;

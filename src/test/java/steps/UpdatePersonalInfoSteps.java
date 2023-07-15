@@ -6,6 +6,7 @@ import utils.CommonMethods;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UpdatePersonalInfoSteps extends CommonMethods {
 
@@ -54,6 +55,31 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
 
     @Then("the user enters or updates the following data:")
     public void the_user_enters_or_updates_the_following_data(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> employeeData = dataTable.asMaps();
+        for (var employee : employeeData) {
+
+            var firstNameValue = employee.get("firstName");
+            var middleNameValue = employee.get("middleName");
+            var lastNameValue = employee.get("lastName");
+            var gender = employee.get("gender");
+            var nationality = employee.get("nationality");
+            var martialStatus = employee.get("maritalStatus");
+
+            sendText(firstNameValue, updatePersonalInfo.personalFirstName);
+            sendText(middleNameValue, updatePersonalInfo.personalMiddleName);
+            sendText(lastNameValue, updatePersonalInfo.personalLastName);
+
+            if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderMale.getText())) {
+                singleCheckBox(updatePersonalInfo.personalGenderIDMale, false);
+            }
+            if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderFemale.getText())) {
+                singleCheckBox(updatePersonalInfo.personalGenderIDFemale, false);
+            }
+
+            selectFromDropdown(updatePersonalInfo.personalNationality, "VisibleText", nationality);
+            selectFromDropdown(updatePersonalInfo.personalMaritalStatusDD, "VisibleText", martialStatus);
+        }
+
 
     }
 
