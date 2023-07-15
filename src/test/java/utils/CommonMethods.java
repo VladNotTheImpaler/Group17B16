@@ -1,10 +1,10 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,17 +12,16 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.UpdatePersonalInfo;
 import steps.PageInitializer;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
@@ -182,6 +181,16 @@ public class CommonMethods extends PageInitializer {
         element.click();
     }
 
+    public static void waitForAppear(WebElement locator, int sec) {
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        wait.until(ExpectedConditions.visibilityOf(locator));
+    }
+
+    public static void waitForDisappear(WebElement locator, int sec) {
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        wait.until(ExpectedConditions.invisibilityOf(locator));
+    }
+
     // Method to switch driver focus to a frame using frame ID or name
     public void switchToFrameByNameOrId(String frameNameOrId) {
         driver.switchTo().frame(frameNameOrId);
@@ -231,6 +240,7 @@ public class CommonMethods extends PageInitializer {
     //method for sending the text to the filed
     public static void sendText(String text, WebElement element) {
         element.clear();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         element.sendKeys(text);
     }
 
@@ -238,6 +248,22 @@ public class CommonMethods extends PageInitializer {
     public static void closeBrowser() {
         if (driver != null) {
             driver.quit();
+        }
+    }
+
+
+    public static void selectFromDropdown(WebElement dd, String selectBy, String value) {
+        Select sel = new Select(dd);
+
+        if (selectBy.equalsIgnoreCase("VisibleText")) {
+            sel.selectByVisibleText(value);
+        } else if (selectBy.equalsIgnoreCase("Value")) {
+            sel.selectByValue(value);
+        } else if (selectBy.equalsIgnoreCase("Index")) {
+            int index = Integer.parseInt(value);
+            sel.selectByIndex(index);
+        } else {
+            throw new IllegalArgumentException("Please use VisibleText,Value,Index");
         }
     }
 
@@ -254,30 +280,74 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
+    // read ExcelFile
+    // was used rebuild method for UpdatePersonalInfo step class - don`t delete
+    public static List<Map<String, String>> readExcelData(String sheetName, String path) {
 
-    public static void selectFromDropdown(WebElement dd, String selectBy,String value){
-        Select sel=new Select(dd);
+        FileInputStream fileInputStream = null;
+        List<Map<String, String>> excelData = new ArrayList<>();
 
-        if(selectBy.equalsIgnoreCase("VisibleText")){
-            sel.selectByVisibleText(value);
-        } else if (selectBy.equalsIgnoreCase("Value")) {
-            sel.selectByValue(value);
-        } else if (selectBy.equalsIgnoreCase("Index")) {
-            int index=Integer.parseInt(value);
-            sel.selectByIndex(index);
-        }else{
-            throw new IllegalArgumentException("Please use VisibleText,Value,Index");
+        try {
+            fileInputStream = new FileInputStream(path);
+            // that special call which knows how to read the data from Excel files
+            //.xls - hssf workbook and .xlsx - xssf workbook
+            var xssfWorkbook = new XSSFWorkbook(fileInputStream);
+            Sheet sheet = xssfWorkbook.getSheet(sheetName);
+
+            var headerRow = sheet.getRow(0);
+            for (int rows = 1; rows < sheet.getPhysicalNumberOfRows(); rows++) {
+                Row row = sheet.getRow(rows);
+
+                Map<String, String> rowMap = new LinkedHashMap<>();
+                for (int col = 0; col < row.getPhysicalNumberOfCells(); col++) {
+                    String key = headerRow.getCell(col).toString();
+                    String value = row.getCell(col).toString();
+                    rowMap.put(key, value);
+                }
+                excelData.add(rowMap);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return excelData;
     }
-    //This method clicks on a web element after waiting for it to be clickable.
-    //It handles any exceptions by printing and error message
-    public static void click(WebElement element, int sec){
-        try{
-            waitForClick(element,sec);
-            element.click();
-        }catch (Exception e){
-            System.out.println("Unable to click element: "+element);
-        }
+
+
+    //please don`t delete I need this method for my step UpdatePersonalInfo class
+    //don`t delete
+    public static List<String> getDisplayedFields() {
+        List<String> displayedFields = new ArrayList<>();
+        displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
+        displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
+        displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
+        displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
+
+        return displayedFields;
     }
+
+    //please don`t delete I need this method for my step AddDependents class
+    //don`t delete
+    public static List<String> getDisplayedDependentsFields() {
+        List<String> displayedFields = new ArrayList<>();
+        displayedFields.add(addEmployeesDependents.dependentName.getAttribute("id"));
+        displayedFields.add(addEmployeesDependents.dependentRelationship.getAttribute("id"));
+        displayedFields.add(addEmployeesDependents.dependentBirth.getAttribute("id"));
+
+        return displayedFields;
+    }
+
+
 }
 
