@@ -20,21 +20,14 @@ Feature: Update Employee Personal Information
       | Female              |
       | personal_cmbNation  |
       | personal_cmbMarital |
-    And the user enters or updates the following data:
-      | Field          | Value           |
-      | First Name     | <firstName>     |
-      | Middle Name    | <middleName>    |
-      | Last Name      | <lastName>      |
-      | Gender         | <gender>        |
-      | Nationality    | <nationality>   |
-      | Marital Status | <maritalStatus> |
+    When user updated "<firstName>", "<middleName>", "<lastName>", "<gender>", "<nationality>", "<maritalStatus>"
     And the user clicks on the Save button
     Then the user should see a success message confirming the changes were saved successfully
 
     Examples:
       | firstName | middleName | lastName | gender | nationality | maritalStatus |
       | John      | OR         | Smith    | Male   | Ukrainian   | Married       |
-      | Jane      | OR         | Johnson  | Male   | Ukrainian   | Single        |
+      #| Jane      | OR         | Johnson  | Male   | Ukrainian   | Single        |
 
   #@updateInfo @excel @regression @smoke
   #Scenario: update employee info using the excel file

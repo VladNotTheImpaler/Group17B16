@@ -1,29 +1,31 @@
 package steps;
 
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonMethods;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
 
 public class UpdatePersonalInfoSteps extends CommonMethods {
 
     @Then("the user clicks on the Employee List button inside the PIM Tab.")
     public void the_user_clicks_on_the_employee_list_button_inside_the_pim_tab() {
-        waitForClick(updatePersonalInfo.empListOption, 10);
+        waitForClick(updatePersonalInfo.pimOption, 10);
     }
 
     @Then("the user searches for the employee by ID using the ID {string}.")
     public void the_user_searches_for_the_employee_by_id_using_the_id(String string) {
-        sendText(string, updatePersonalInfo.idTextField);
+        sendText(string, updatePersonalInfo.idTextField, 10);
         waitForClick(updatePersonalInfo.searchButton, 10);
     }
 
     @Then("the user clicks on the employee from the search results.")
     public void the_user_clicks_on_the_employee_from_the_search_results() {
-        waitForClick(updatePersonalInfo.idTableCell, 20);
+        waitForClick(updatePersonalInfo.idTableCell, 10);
     }
 
     @Then("the user navigates to the Employee page.")
@@ -51,45 +53,45 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
         for (String expectedField : expectedFields) {
             Assert.assertTrue("Field not found: " + expectedField, actualFields.contains(expectedField));
         }
+        System.out.println("All field found and matched");
     }
 
-    @Then("the user enters or updates the following data:")
-    public void the_user_enters_or_updates_the_following_data(io.cucumber.datatable.DataTable dataTable) {
-        List<Map<String, String>> employeeData = dataTable.asMaps();
-        for (var employee : employeeData) {
+    @When("user updated {string}, {string}, {string}, {string}, {string}, {string}")
+    public void userUpdatedInDataDriverFormat
+            (String firstNameValue, String middleNameValue, String lastNameValue,
+             String gender, String nationality, String martialStatus) {
 
-            var firstNameValue = employee.get("firstName");
-            var middleNameValue = employee.get("middleName");
-            var lastNameValue = employee.get("lastName");
-            var gender = employee.get("gender");
-            var nationality = employee.get("nationality");
-            var martialStatus = employee.get("maritalStatus");
+        sendText(firstNameValue, updatePersonalInfo.personalFirstName, 10);
+        sendText(middleNameValue, updatePersonalInfo.personalMiddleName, 10);
+        sendText(lastNameValue, updatePersonalInfo.personalLastName, 10);
 
-            sendText(firstNameValue, updatePersonalInfo.personalFirstName);
-            sendText(middleNameValue, updatePersonalInfo.personalMiddleName);
-            sendText(lastNameValue, updatePersonalInfo.personalLastName);
-
-            if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderMale.getText())) {
-                singleCheckBox(updatePersonalInfo.personalGenderIDMale, false);
-            }
-            if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderFemale.getText())) {
-                singleCheckBox(updatePersonalInfo.personalGenderIDFemale, false);
-            }
-
-            selectFromDropdown(updatePersonalInfo.personalNationality, "VisibleText", nationality);
-            selectFromDropdown(updatePersonalInfo.personalMaritalStatusDD, "VisibleText", martialStatus);
+        if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderMale.getText())) {
+            singleCheckBox(updatePersonalInfo.personalGenderIDMale, false);
         }
-
+        if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderFemale.getText())) {
+            singleCheckBox(updatePersonalInfo.personalGenderIDFemale, false);
+        }
+        selectFromDropdown(updatePersonalInfo.personalNationality, "VisibleText", nationality);
+        selectFromDropdown(updatePersonalInfo.personalMaritalStatusDD, "VisibleText", martialStatus);
 
     }
 
     @Then("the user clicks on the Save button")
-    public void the_user_clicks_on_the_button() {
-
+    public void the_user_clicks_on_the_button() throws InterruptedException {
+        waitForClick(updatePersonalInfo.btnSave, 10);
     }
 
     @Then("the user should see a success message confirming the changes were saved successfully")
     public void the_user_should_see_a_success_message_confirming_the_changes_were_saved_successfully() {
 
+        var specialElement = updatePersonalInfo.successSavedMsg;
+        waitForAppear(specialElement, 0);
+        boolean present = specialElement.isDisplayed();
+        Assert.assertTrue("Successfully Saved not presented", present);
+        System.out.println("Successfully Saved Massage Presented");
+        //takeScreenshot("saved");
+
     }
+
+
 }

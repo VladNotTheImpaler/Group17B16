@@ -7,12 +7,11 @@ import utils.CommonMethods;
 
 public class UpdatePersonalInfo extends CommonMethods {
 
-    @FindBy(id = "menu_pim_viewEmployeeList")
-    public WebElement empListOption;
+    @FindBy(id = "menu_pim_viewPimModule")
+    public WebElement pimOption;
 
     @FindBy(id = "empsearch_id")
     public WebElement idTextField;
-
     @FindBy(xpath = "//*[@id='resultTable']/tbody/tr/td[2]")
     public WebElement idTableCell;
 
@@ -25,6 +24,12 @@ public class UpdatePersonalInfo extends CommonMethods {
     @FindBy(xpath = "//*[@value='Edit']")
     public WebElement btnEdit;
 
+    @FindBy(xpath = "//*[@value='Save']")
+    public WebElement btnSave;
+
+    @FindBy(css = "div.message.success.fadable")
+    public WebElement successFadable;
+
     @FindBy(id = "personal_txtEmpFirstName")
     public WebElement personalFirstName;
 
@@ -33,6 +38,9 @@ public class UpdatePersonalInfo extends CommonMethods {
 
     @FindBy(id = "personal_txtEmpLastName")
     public WebElement personalLastName;
+
+    @FindBy(xpath = "//*[contains(text(),'Successfully Saved')]")
+    public WebElement successSavedMsg;
 
     @FindBy(xpath = "//*[contains(text(),'Male')]")
     public WebElement personalGenderMale;

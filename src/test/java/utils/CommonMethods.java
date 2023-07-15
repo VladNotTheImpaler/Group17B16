@@ -1,10 +1,7 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -183,6 +180,16 @@ public class CommonMethods extends PageInitializer {
         element.click();
     }
 
+    public static void waitForAppear(WebElement locator, int sec) {
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        wait.until(ExpectedConditions.visibilityOf(locator));
+    }
+
+    public static void waitForDisappear(WebElement locator, int sec) {
+        var wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        wait.until(ExpectedConditions.invisibilityOf(locator));
+    }
+
     // Method to switch driver focus to a frame using frame ID or name
     public void switchToFrameByNameOrId(String frameNameOrId) {
         driver.switchTo().frame(frameNameOrId);
@@ -230,8 +237,9 @@ public class CommonMethods extends PageInitializer {
 
 
     //method for sending the text to the filed
-    public static void sendText(String text, WebElement element) {
+    public static void sendText(String text, WebElement element, int sec) {
         element.clear();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(sec));
         element.sendKeys(text);
     }
 
@@ -271,8 +279,6 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
-
-
     //please don`t delete I need this method for my step UpdatePersonalInfo class
     public static List<String> getDisplayedFields() {
         List<String> displayedFields = new ArrayList<>();
@@ -286,7 +292,6 @@ public class CommonMethods extends PageInitializer {
 
         return displayedFields;
     }
-
 
 }
 
