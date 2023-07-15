@@ -57,6 +57,7 @@ public class AddEmployeesDependentsSteps extends CommonMethods {
     }
 
 
+    /*
     //edit dependent
     @Then("there is a dependent named {string} in the list")
     public void there_is_a_dependent_named_in_the_list(String string) {
@@ -104,6 +105,6 @@ public class AddEmployeesDependentsSteps extends CommonMethods {
     public void the_user_should_see_an_error_message_indicating_the_issue() {
 
     }
-
+*/
 
 }
