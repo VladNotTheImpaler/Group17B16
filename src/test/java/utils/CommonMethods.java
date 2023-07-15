@@ -314,40 +314,41 @@ public class CommonMethods extends PageInitializer {
                 if (fileInputStream != null) {
                     fileInputStream.close();
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return excelData;
+    return excelData;
     }
 
 
-    //please don`t delete I need this method for my step UpdatePersonalInfo class
-    //don`t delete
-    public static List<String> getDisplayedFields() {
-        List<String> displayedFields = new ArrayList<>();
-        displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
-        displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
-        displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
-        displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
-        displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
-        displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
-        displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
+            //please don`t delete I need this method for my step UpdatePersonalInfo class
+            //don`t delete
+            public static List<String> getDisplayedFields () {
+                List<String> displayedFields = new ArrayList<>();
+                displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
+                displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
+                displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
+                displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
+                displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
+                displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
+                displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
 
-        return displayedFields;
-    }
+                return displayedFields;
+            }
 
-    //please don`t delete I need this method for my step AddDependents class
-    //don`t delete
-    public static List<String> getDisplayedDependentsFields() {
-        List<String> displayedFields = new ArrayList<>();
-        displayedFields.add(addEmployeesDependents.dependentName.getAttribute("id"));
-        displayedFields.add(addEmployeesDependents.dependentRelationship.getAttribute("id"));
-        displayedFields.add(addEmployeesDependents.dependentBirth.getAttribute("id"));
+            //please don`t delete I need this method for my step AddDependents class
+            //don`t delete
+            public static List<String> getDisplayedDependentsFields () {
+                List<String> displayedFields = new ArrayList<>();
+                displayedFields.add(addEmployeesDependents.dependentName.getAttribute("id"));
+                displayedFields.add(addEmployeesDependents.dependentRelationship.getAttribute("id"));
+                displayedFields.add(addEmployeesDependents.dependentBirth.getAttribute("id"));
 
-        return displayedFields;
-    }
+                return displayedFields;
+            }
 
 
-}
+        }
 
