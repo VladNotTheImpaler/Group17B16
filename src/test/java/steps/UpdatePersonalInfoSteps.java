@@ -89,7 +89,6 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
         boolean present = specialElement.isDisplayed();
         Assert.assertTrue("Successfully Saved not presented", present);
         System.out.println("Successfully Saved Massage Presented");
-        //takeScreenshot("saved");
 
     }
 
