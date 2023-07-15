@@ -32,7 +32,7 @@ Feature: Add Employees Dependents
 
   @dependent @removeDependent @regression @smoke
   Scenario: Remove a dependent
-    And there is a dependent named "Jane Smith" in the list
+    And there is a dependent new named "Jane Smith" in the list
     When the user removes the dependent named "Jane Smith"
     Then the user should not see "Jane Smith" in the list of dependents
 
