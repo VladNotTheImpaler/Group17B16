@@ -10,4 +10,7 @@ public class Constants {
     //Please use this Excel reader path and create your own variable with the name of your own Excel file after testdata/
     public static final String EXCEL_READER_PATH=System.getProperty("user.dir")+"/src/test/resources/testdata/";
 
+    public static final String EXCEL_READER_PATH_OLEKSII_2 = System.getProperty("user.dir") +
+            "/src/test/resources/testDataOleksii/UpdateEmployeeInfoBatch16G17.xlsx";
+
 }
