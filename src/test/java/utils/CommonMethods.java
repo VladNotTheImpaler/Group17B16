@@ -256,8 +256,8 @@ public class CommonMethods extends PageInitializer {
 
 
     public static void selectFromDropdown(WebElement dd, String selectBy,String value){
-        Select sel=new Select(dd);
 
+        Select sel=new Select(dd);
         if(selectBy.equalsIgnoreCase("VisibleText")){
             sel.selectByVisibleText(value);
         } else if (selectBy.equalsIgnoreCase("Value")) {

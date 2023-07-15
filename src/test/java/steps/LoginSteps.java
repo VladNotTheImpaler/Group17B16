@@ -30,6 +30,16 @@ public class LoginSteps extends CommonMethods {
         var actualWelcomeMsg = loginPage.welcomeAdmin.getText();
         Assert.assertEquals(expectedWelcomeMsg, actualWelcomeMsg);
     }
-
+    @When("user enters valid employee username and password")
+    public void user_enters_valid_employee_username_and_password() {
+        sendText(getProperty("usernameEmp"),loginPage.getUsernameField());
+        sendText(getProperty("passwordEmp"),loginPage.getPasswordField());
+    }
+    @Then("employee user is successfully logged in the application")
+    public void employee_user_is_successfully_logged_in_the_application() {
+        var expectedWelcomeMsg = "Welcome "+getProperty("nameEmp");
+        var actualWelcomeMsg = loginPage.welcomeAdmin.getText();
+        Assert.assertEquals(expectedWelcomeMsg, actualWelcomeMsg);
+    }
 
 }
