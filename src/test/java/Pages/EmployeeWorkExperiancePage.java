@@ -48,8 +48,8 @@ public class EmployeeWorkExperiancePage extends CommonMethods {
     @FindBy(id = "experience_jobtitle")
     public WebElement jobTitle;
 
-//    @FindBy(id = "experience_from_date")
-//    public WebElement fromDate;
+   @FindBy(id = "experience_from_date")
+    public WebElement fromDate;
 
     @FindBy(xpath = "//select[@class='ui-datepicker-month']")
     public  WebElement fromMonth;
@@ -65,6 +65,12 @@ public class EmployeeWorkExperiancePage extends CommonMethods {
 
     @FindBy(id = "btnWorkExpSave")
     public WebElement workexpsavebtn;
+
+    @FindBy (xpath = "//input[@id='delWorkExperience']")
+    public WebElement deletework;
+
+    @FindBy (xpath = "//div[@class='message success fadable']")
+    public WebElement saveMessage;
 
 
 
