@@ -12,7 +12,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.UpdatePersonalInfo;
 import steps.PageInitializer;
 
 import java.io.File;
@@ -280,6 +279,22 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
+    //please don`t delete I need this method for my step UpdatePersonalInfo class
+    //don`t delete
+    public static List<String> getDisplayedFields() {
+        List<String> displayedFields = new ArrayList<>();
+        displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
+        displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
+        displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
+        displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
+
+        return displayedFields;
+    }
+
+
     // read ExcelFile
     // was used rebuild method for UpdatePersonalInfo step class - don`t delete
     public static List<Map<String, String>> readExcelData(String sheetName, String path) {
@@ -314,41 +329,13 @@ public class CommonMethods extends PageInitializer {
                 if (fileInputStream != null) {
                     fileInputStream.close();
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    return excelData;
+        return excelData;
     }
 
 
-            //please don`t delete I need this method for my step UpdatePersonalInfo class
-            //don`t delete
-            public static List<String> getDisplayedFields () {
-                List<String> displayedFields = new ArrayList<>();
-                displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
-                displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
-                displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
-                displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
-                displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
-                displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
-                displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
-
-                return displayedFields;
-            }
-
-            //please don`t delete I need this method for my step AddDependents class
-            //don`t delete
-            public static List<String> getDisplayedDependentsFields () {
-                List<String> displayedFields = new ArrayList<>();
-                displayedFields.add(addEmployeesDependents.dependentName.getAttribute("id"));
-                displayedFields.add(addEmployeesDependents.dependentRelationship.getAttribute("id"));
-                displayedFields.add(addEmployeesDependents.dependentBirth.getAttribute("id"));
-
-                return displayedFields;
-            }
-
-
-        }
+}
 

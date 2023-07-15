@@ -32,4 +32,4 @@ Feature: Update Employee Personal Information
 
   @updateInfo @excelOleksii @regression @smoke
   Scenario: update employee info using the excel file
-    When user update the employee data using excel file "UpdateEmployeeInfoBatch16G17" and verify it
+   When user update the employee data using excel file "UpdateEmployeeInfoBatch16G17" and verify it
