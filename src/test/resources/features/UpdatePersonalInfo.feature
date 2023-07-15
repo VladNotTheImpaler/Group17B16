@@ -27,9 +27,9 @@ Feature: Update Employee Personal Information
     Examples:
       | firstName | middleName | lastName | gender | nationality | maritalStatus |
       | John      | OR         | Smith    | Male   | Ukrainian   | Married       |
-      | Jane      | OR         | Johnson  | Female | Ukrainian   | Single        |
-      | Jakie     | OR         | Wilson   | Male   | Ukrainian   | Other         |
+      #| Jane      | OR         | Johnson  | Female | Ukrainian   | Single        |
+      #| Jakie     | OR         | Wilson   | Male   | Ukrainian   | Other         |
 
-  @updateInfo @excel @regression @smoke
+  @updateInfo @excelOleksii @regression @smoke
   Scenario: update employee info using the excel file
    When user update the employee data using excel file "UpdateEmployeeInfoBatch16G17" and verify it

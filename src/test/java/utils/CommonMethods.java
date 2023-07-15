@@ -280,6 +280,7 @@ public class CommonMethods extends PageInitializer {
     }
 
     //please don`t delete I need this method for my step UpdatePersonalInfo class
+    //don`t delete
     public static List<String> getDisplayedFields() {
         List<String> displayedFields = new ArrayList<>();
         displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
@@ -294,7 +295,8 @@ public class CommonMethods extends PageInitializer {
     }
 
 
-    // read ExcelFile with special
+    // read ExcelFile
+    // was used rebuild method for UpdatePersonalInfo step class - don`t delete
     public static List<Map<String, String>> readExcelData(String sheetName, String path) {
 
         FileInputStream fileInputStream = null;
