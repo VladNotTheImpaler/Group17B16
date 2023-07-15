@@ -13,9 +13,9 @@ public class LoginSteps extends CommonMethods {
     public void user_enters_valid_admin_username_and_password() {
         DOMConfigurator.configure("log4j.xml");
         Log.startTestCase("My Group17B16 test case starts here");
-        sendText(getProperty("username"), loginPage.getUsernameField(), 10);
+        sendText(getProperty("username"), loginPage.getUsernameField());
         Log.info("my username has been entered");
-        sendText(getProperty("password"), loginPage.getPasswordField(), 10);
+        sendText(getProperty("password"), loginPage.getPasswordField());
         Log.info("My password has been entered");
     }
 

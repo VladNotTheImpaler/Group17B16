@@ -3,12 +3,12 @@ package steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonMethods;
+import utils.Constants;
+import utils.ExcelReader;
 
-import java.time.Duration;
+import java.util.Iterator;
+import java.util.Map;
 
 public class UpdatePersonalInfoSteps extends CommonMethods {
 
@@ -19,7 +19,7 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
 
     @Then("the user searches for the employee by ID using the ID {string}.")
     public void the_user_searches_for_the_employee_by_id_using_the_id(String string) {
-        sendText(string, updatePersonalInfo.idTextField, 10);
+        sendText(string, updatePersonalInfo.idTextField);
         waitForClick(updatePersonalInfo.searchButton, 10);
     }
 
@@ -61,9 +61,9 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
             (String firstNameValue, String middleNameValue, String lastNameValue,
              String gender, String nationality, String martialStatus) {
 
-        sendText(firstNameValue, updatePersonalInfo.personalFirstName, 10);
-        sendText(middleNameValue, updatePersonalInfo.personalMiddleName, 10);
-        sendText(lastNameValue, updatePersonalInfo.personalLastName, 10);
+        sendText(firstNameValue, updatePersonalInfo.personalFirstName);
+        sendText(middleNameValue, updatePersonalInfo.personalMiddleName);
+        sendText(lastNameValue, updatePersonalInfo.personalLastName);
 
         if (gender.equalsIgnoreCase(updatePersonalInfo.personalGenderMale.getText())) {
             singleCheckBox(updatePersonalInfo.personalGenderIDMale, false);
@@ -77,7 +77,7 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
     }
 
     @Then("the user clicks on the Save button")
-    public void the_user_clicks_on_the_button() throws InterruptedException {
+    public void the_user_clicks_on_the_button() {
         waitForClick(updatePersonalInfo.btnSave, 10);
     }
 
@@ -90,6 +90,37 @@ public class UpdatePersonalInfoSteps extends CommonMethods {
         Assert.assertTrue("Successfully Saved not presented", present);
         System.out.println("Successfully Saved Massage Presented");
 
+    }
+
+    @When("user update the employee data using excel file {string} and verify it")
+    public void userUpdateTheEmployeeDataUsingExcelFromAndVerifyIt(String sheetName) {
+
+        var newEmployees = readExcelData(sheetName, Constants.EXCEL_READER_PATH_OLEKSII);
+        for (Map<String, String> mapNewEmp : newEmployees) {
+            sendText(mapNewEmp.get("firstName"), updatePersonalInfo.personalFirstName);
+            sendText(mapNewEmp.get("middleName"), updatePersonalInfo.personalMiddleName);
+            sendText(mapNewEmp.get("lastName"), updatePersonalInfo.personalLastName);
+
+            if (mapNewEmp.get("gender").equalsIgnoreCase(updatePersonalInfo.personalGenderMale.getText())) {
+                singleCheckBox(updatePersonalInfo.personalGenderIDMale, false);
+            }
+            if (mapNewEmp.get("gender").equalsIgnoreCase(updatePersonalInfo.personalGenderFemale.getText())) {
+                singleCheckBox(updatePersonalInfo.personalGenderIDFemale, false);
+            }
+
+            selectFromDropdown(updatePersonalInfo.personalNationality, "VisibleText", mapNewEmp.get("nationality"));
+            selectFromDropdown(updatePersonalInfo.personalMaritalStatusDD, "VisibleText", mapNewEmp.get("maritalStatus"));
+
+            waitForClick(updatePersonalInfo.btnSave, 10);
+
+            var specialElement = updatePersonalInfo.successSavedMsg;
+            waitForAppear(specialElement, 0);
+            boolean present = specialElement.isDisplayed();
+            Assert.assertTrue("Successfully Saved not presented", present);
+            System.out.println("Successfully Saved Massage Presented");
+
+            waitForClick(updatePersonalInfo.btnEdit, 10);
+        }
     }
 
 

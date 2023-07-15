@@ -1,6 +1,9 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,12 +18,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
@@ -237,9 +237,9 @@ public class CommonMethods extends PageInitializer {
 
 
     //method for sending the text to the filed
-    public static void sendText(String text, WebElement element, int sec) {
+    public static void sendText(String text, WebElement element) {
         element.clear();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(sec));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         element.sendKeys(text);
     }
 
@@ -292,6 +292,48 @@ public class CommonMethods extends PageInitializer {
 
         return displayedFields;
     }
+
+
+    // read ExcelFile with special
+    public static List<Map<String, String>> readExcelData(String sheetName, String path) {
+
+        FileInputStream fileInputStream = null;
+        List<Map<String, String>> excelData = new ArrayList<>();
+
+        try {
+            fileInputStream = new FileInputStream(path);
+            // that special call which knows how to read the data from Excel files
+            //.xls - hssf workbook and .xlsx - xssf workbook
+            var xssfWorkbook = new XSSFWorkbook(fileInputStream);
+            Sheet sheet = xssfWorkbook.getSheet(sheetName);
+
+            var headerRow = sheet.getRow(0);
+            for (int rows = 1; rows < sheet.getPhysicalNumberOfRows(); rows++) {
+                Row row = sheet.getRow(rows);
+
+                Map<String, String> rowMap = new LinkedHashMap<>();
+                for (int col = 0; col < row.getPhysicalNumberOfCells(); col++) {
+                    String key = headerRow.getCell(col).toString();
+                    String value = row.getCell(col).toString();
+                    rowMap.put(key, value);
+                }
+                excelData.add(rowMap);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return excelData;
+    }
+
 
 }
 

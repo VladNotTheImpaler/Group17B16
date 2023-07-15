@@ -4,9 +4,6 @@ Feature: Update Employee Personal Information
     When user enters valid admin username and password
     And user clicks on login button
     Then user is successfully logged in the application
-
-  @updateInfo @scenarioOutline @regression @smoke
-  Scenario Outline: update employee info with multiply set of data using scenario outline
     And the user clicks on the Employee List button inside the PIM Tab.
     And the user searches for the employee by ID using the ID "49749018".
     And the user clicks on the employee from the search results.
@@ -20,6 +17,9 @@ Feature: Update Employee Personal Information
       | Female              |
       | personal_cmbNation  |
       | personal_cmbMarital |
+
+  @updateInfo @scenarioOutline @regression @smoke
+  Scenario Outline: update employee info with multiply set of data using scenario outline
     When user updated "<firstName>", "<middleName>", "<lastName>", "<gender>", "<nationality>", "<maritalStatus>"
     And the user clicks on the Save button
     Then the user should see a success message confirming the changes were saved successfully
@@ -32,4 +32,4 @@ Feature: Update Employee Personal Information
 
   @updateInfo @excel @regression @smoke
   Scenario: update employee info using the excel file
-   When user update the employee data using excel from "UpdateEmployeeInfoBatch16G17" and verify it
+   When user update the employee data using excel file "UpdateEmployeeInfoBatch16G17" and verify it
