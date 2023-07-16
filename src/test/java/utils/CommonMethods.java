@@ -216,7 +216,7 @@ public class CommonMethods extends PageInitializer {
     // method for taking the screenshots specifically for the Cucumber +
     // attach it to the report using the array of bytes concepts
     public static byte[] takeScreenshot(String name) {
-        var ts = (TakesScreenshot) driver;
+        TakesScreenshot ts = (TakesScreenshot) driver;
         var picBytes = ts.getScreenshotAs(OutputType.BYTES);
         var file = ts.getScreenshotAs(OutputType.FILE);
 
