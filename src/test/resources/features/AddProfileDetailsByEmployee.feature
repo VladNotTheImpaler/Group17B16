@@ -13,7 +13,7 @@ Feature: Adding profile details by the Employee
     And user clicks on addLanguage button
     And user enters Language and Fluency and Competency
       |Language|Fluency  |Competency|
-      |Dutch   |Speaking  |Good      |
+      |Amharic   |Speaking  |Good      |
 
     And user send text to commentsField
     And user checks the mandatory language fields and click save button
