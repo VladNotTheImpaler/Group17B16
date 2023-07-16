@@ -18,7 +18,7 @@ public class PageInitializer {
 
     public static MyInfoPage myInfoPage;
 
-    public static PersonalDetailsPage personalDetailsPage;
+
 
 
     public static void initializePageObjects() {
@@ -29,7 +29,7 @@ public class PageInitializer {
         emp=new EmployeeWorkExperiancePage();
         jobEmployeePage=new JobEmployeePage();
         myInfoPage=new MyInfoPage();
-        personalDetailsPage=new PersonalDetailsPage();
+
 
     }
 }
