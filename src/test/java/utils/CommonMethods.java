@@ -4,7 +4,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,16 +15,14 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.UpdatePersonalInfo;
 import steps.PageInitializer;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
-
-import java.text.SimpleDateFormat;
 
 public class CommonMethods extends PageInitializer {
     public static WebDriver driver;
@@ -280,8 +281,35 @@ public class CommonMethods extends PageInitializer {
         }
     }
 
+    //please don`t delete I need this method for my step UpdatePersonalInfo class
+    //don`t delete
+    public static List<String> getDisplayedFields() {
+        List<String> displayedFields = new ArrayList<>();
+        displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
+        displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
+        displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
+        displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
+        displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
+
+        return displayedFields;
+    }
+
+    //please dont delete I need this method for my step AddDependents class
+    //dont delete
+    public static List<String> getDisplayedDependentsFields () {
+        List<String> displayedFields = new ArrayList<>();
+        displayedFields.add(addEmployeesDependents.dependentName.getAttribute("id"));
+        displayedFields.add(addEmployeesDependents.dependentRelationship.getAttribute("id"));
+        displayedFields.add(addEmployeesDependents.dependentBirth.getAttribute("id"));
+
+        return displayedFields;
+    }
+
     // read ExcelFile
     // was used rebuild method for UpdatePersonalInfo step class - don`t delete
+    //My code would not work with ExcelReader class so I just copy pasted it here
     public static List<Map<String, String>> readExcelData(String sheetName, String path) {
 
         FileInputStream fileInputStream = null;
@@ -314,41 +342,25 @@ public class CommonMethods extends PageInitializer {
                 if (fileInputStream != null) {
                     fileInputStream.close();
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    return excelData;
+        return excelData;
     }
 
 
-            //please don`t delete I need this method for my step UpdatePersonalInfo class
-            //don`t delete
-            public static List<String> getDisplayedFields () {
-                List<String> displayedFields = new ArrayList<>();
-                displayedFields.add(updatePersonalInfo.personalFirstName.getAttribute("title"));
-                displayedFields.add(updatePersonalInfo.personalMiddleName.getAttribute("title"));
-                displayedFields.add(updatePersonalInfo.personalLastName.getAttribute("title"));
-                displayedFields.add(updatePersonalInfo.personalGenderMale.getText());
-                displayedFields.add(updatePersonalInfo.personalGenderFemale.getText());
-                displayedFields.add(updatePersonalInfo.personalNationality.getAttribute("id"));
-                displayedFields.add(updatePersonalInfo.personalMaritalStatusDD.getAttribute("id"));
+    //This method clicks on a web element after waiting for it to be clickable.
+    //It handles any exceptions by printing and error message
 
-                return displayedFields;
-            }
+    public static void click(WebElement element, int sec){
 
-            //please don`t delete I need this method for my step AddDependents class
-            //don`t delete
-            public static List<String> getDisplayedDependentsFields () {
-                List<String> displayedFields = new ArrayList<>();
-                displayedFields.add(addEmployeesDependents.dependentName.getAttribute("id"));
-                displayedFields.add(addEmployeesDependents.dependentRelationship.getAttribute("id"));
-                displayedFields.add(addEmployeesDependents.dependentBirth.getAttribute("id"));
-
-                return displayedFields;
-            }
-
-
+        try{
+            waitForClick(element,sec);
+            element.click();
+        }catch (Exception e){
+            System.out.println("Unable to click element: "+element);
         }
+    }
+}
 

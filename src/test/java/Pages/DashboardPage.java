@@ -18,5 +18,6 @@ public class DashboardPage extends CommonMethods {
     public DashboardPage(){
         PageFactory.initElements(driver,this);
     }
+    @FindBy(id="menu_pim_viewMyDetails")
+    public WebElement myDetailsOption;
 }
-

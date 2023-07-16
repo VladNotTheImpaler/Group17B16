@@ -1,22 +1,20 @@
 package steps;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import pages.PersonalDetailsPage;
 import utils.CommonMethods;
 
 public class terminateEmployeeSteps extends CommonMethods {
 
     @When("Admin clciks on PIM option")
     public void admin_clciks_on_pim_option() {
-        click(dashboardPage.pimOption,20);
+        click(dashBoardPage.pimOption,20);
     }
     @When("user clicks on employee list button")
     public void user_clicks_on_employee_list_button() {
-        click(dashboardPage.empListOption, 20);
+        click(dashBoardPage.empListOption, 20);
     }
     @When("Admin selects a specified employee from the list")
     public void admin_selects_a_specified_employee_from_the_list() {

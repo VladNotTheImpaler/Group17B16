@@ -53,7 +53,7 @@ public class JobEmployeeSteps extends CommonMethods {
 
     @When("user adds multiple employees job details using excel from {string}")
     public void user_adds_multiple_employees_job_details_using_excel_from(String sheetName) {
-        List<Map<String,String>> addDetails= ExcelReader.getExcelData(sheetName, Constants.EXCEL_READER_PATH);
+        List<Map<String,String>> addDetails= ExcelReader.getExcelData(sheetName, Constants.EXCEL_READER_PATH_Nat);
         Iterator<Map<String,String>> itr=addDetails.iterator();
         while (itr.hasNext()){
             Map<String,String> jobDet=itr.next();

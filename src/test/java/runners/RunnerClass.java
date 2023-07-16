@@ -11,13 +11,10 @@ import org.junit.runner.RunWith;
         // It executes the tests and generates reports in different formats.
         features = "src/test/resources/features/",
         glue = "steps",
-
-
-        dryRun = true,
-        tags="@test",
-
+        dryRun = false,
+        tags = "@addDependent",
         monochrome = true,
-        plugin={"pretty","html:target/cucumber.html","json:target/cucumber.json",
+        plugin = {"pretty", "html:target/cucumber.html", "json:target/cucumber.json",
                 "rerun:target/failed.txt"}
 )
 public class RunnerClass {

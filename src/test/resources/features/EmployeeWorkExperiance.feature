@@ -1,11 +1,13 @@
 Feature: Employee adding work experiance
 
-
-  @smoke
-  Scenario Outline: Add Experience
+  Background:
     Given user navigates to HRMS application
     When user enters username and password
     And  User click on login button
+
+  @smoke @farwa
+  Scenario Outline: Add Experience
+
     When user click Pim Tab and Employee List Tab
     And click Add button
     Then user enter "<firstName>" and "<middleName>" and "<lastName>"

@@ -1,42 +1,35 @@
 package steps;
 
-
-import pages.EmployeeWorkExperiancePage;
-
-import pages.AddEmployeesDependents;
-
-import pages.LoginPage;
-import pages.UpdatePersonalInfo;
-
-
-import pages.DashBoardPage;
-import pages.JobEmployeePage;
-import pages.LoginPage;
-import pages.MyInfoPage;
-
+import pages.*;
 
 public class PageInitializer {
+    //methods in which we will add in the future all our
+    // object of the POM classes
 
-    public static EmployeeWorkExperiancePage emp;
     public static LoginPage loginPage;
     public static UpdatePersonalInfo updatePersonalInfo;
+
+    public static DashboardPage dashBoardPage;
+
     public static AddEmployeesDependents addEmployeesDependents;
+
+    public static EmployeeWorkExperiancePage emp;
     public static JobEmployeePage jobEmployeePage;
-    public static DashBoardPage dashBoardPage;
+
     public static MyInfoPage myInfoPage;
+
+    public static PersonalDetailsPage personalDetailsPage;
 
 
     public static void initializePageObjects() {
-           emp=new EmployeeWorkExperiancePage();
-           loginPage=new LoginPage();
+        loginPage = new LoginPage();
         updatePersonalInfo = new UpdatePersonalInfo();
-        addEmployeesDependents = new AddEmployeesDependents();
-        jobEmployeePage =new JobEmployeePage();
-        dashBoardPage=new DashBoardPage();
+        dashBoardPage=new DashboardPage();
+        addEmployeesDependents=new AddEmployeesDependents();
+        emp=new EmployeeWorkExperiancePage();
+        jobEmployeePage=new JobEmployeePage();
         myInfoPage=new MyInfoPage();
-
+        personalDetailsPage=new PersonalDetailsPage();
 
     }
-
-
 }

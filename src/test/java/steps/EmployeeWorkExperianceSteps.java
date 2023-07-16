@@ -4,16 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import utils.CommonMethods;
-import utils.Constants;
-import utils.ExcelReader;
-
-import java.io.ObjectInputFilter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 public class EmployeeWorkExperianceSteps extends CommonMethods {
 
@@ -33,6 +24,8 @@ public class EmployeeWorkExperianceSteps extends CommonMethods {
         loginPage.loginButton.click();
 
     }
+
+
 
     @When("user click Pim Tab and Employee List Tab")
     public void user_click_pim_tab_and_employee_list_tab() {
