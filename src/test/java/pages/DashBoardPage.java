@@ -5,18 +5,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.CommonMethods;
 
-public class DashBoardPage extends CommonMethods {
+public class DashboardPage extends CommonMethods {
     @FindBy(id="menu_pim_viewPimModule")
     public WebElement pimOption;
 
     @FindBy(id="menu_pim_viewEmployeeList")
     public WebElement empListOption;
-    @FindBy(id="menu_pim_viewMyDetails")
-    public WebElement myDetailsOption;
 
+    @FindBy(id="menu_pim_addEmployee")
+    public WebElement addEmployeeButton;
 
-
-    public DashBoardPage(){
+    public DashboardPage(){
         PageFactory.initElements(driver,this);
     }
 }
+
