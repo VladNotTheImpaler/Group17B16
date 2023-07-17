@@ -3,6 +3,7 @@ package steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.Select;
 import utils.CommonMethods;
 import utils.Constants;
 
@@ -40,8 +41,20 @@ public class AddEmployeesDependentsSteps extends CommonMethods {
         var addDependents = readExcelData(sheetName, Constants.EXCEL_READER_PATH_OLEKSII_2);
         for (Map<String, String> mapNewDependent : addDependents) {
             sendText(mapNewDependent.get("name"), addEmployeesDependents.dependentName);
-            selectFromDropdown(addEmployeesDependents.dependentRelationship, "VisibleText", mapNewDependent.get("relationship"));
-            sendText(mapNewDependent.get("relationship"), addEmployeesDependents.dependentRelationship);
+
+            var relationship = mapNewDependent.get("relationship");
+            var specify = mapNewDependent.get("specify");
+
+            Select sel = new Select(addEmployeesDependents.dependentRelationship);
+            sel.selectByVisibleText("Other");
+
+            if (relationship.equals("Other")) {
+                sel.selectByVisibleText("Other");
+                sendText(specify, addEmployeesDependents.dependentRelationshipDesc);
+            } else {
+                selectFromDropdown(addEmployeesDependents.dependentRelationship, "VisibleText", relationship);
+            }
+
             sendText(mapNewDependent.get("birth"), addEmployeesDependents.dependentBirth);
 
             waitForClick(addEmployeesDependents.dependentSave, 10);

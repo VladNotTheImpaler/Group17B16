@@ -18,6 +18,11 @@ public class PageInitializer {
 
     public static MyInfoPage myInfoPage;
 
+    public static DashboardPage dashboardPage;
+    public static AddEmployeePage addEmployeePage;
+
+    public static SearchEmployeePage searchEmployeePage;
+
 
 
 
@@ -29,6 +34,9 @@ public class PageInitializer {
         emp=new EmployeeWorkExperiancePage();
         jobEmployeePage=new JobEmployeePage();
         myInfoPage=new MyInfoPage();
+        dashboardPage=new DashboardPage();
+        addEmployeePage=new AddEmployeePage();
+        searchEmployeePage = new SearchEmployeePage();
 
 
     }

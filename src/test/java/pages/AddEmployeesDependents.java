@@ -18,6 +18,10 @@ public class AddEmployeesDependents extends CommonMethods {
 
     @FindBy(id = "dependent_relationshipType")
     public WebElement dependentRelationship;
+
+    @FindBy(id = "dependent_relationship")
+    public WebElement dependentRelationshipDesc;
+
     @FindBy(xpath = "//*[@id='resultTable']/tbody/tr/td[2]")
     public WebElement dependentSpecify;
 
